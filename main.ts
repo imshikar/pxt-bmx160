@@ -43,15 +43,20 @@ namespace bmx160 {
     export function test(): number {
         /*setreg(0x7E, 0xB6)
         control.waitMicros(15);
+        
         setreg(0x7E, 0x11)
         control.waitMicros(50);
         setreg(0x7E, 0x15)
         control.waitMicros(100);
         setreg(0x7E, 0x19)
         control.waitMicros(10);
-        setreg(0x7B, 11)*/
-        setreg(0x7E, 0xB2);
-        serial.writeLine("" + getUInt8LE(0x7A))
+        */       
+        setreg(0x7E, 0x11)
+        control.waitMicros(100);
+        setreg(0x7B, 11);
+       setreg(0x7E, 0xB2);
+
+        serial.writeLine("" + getUInt8LE(0x03))
         serial.writeLine("" + getUInt8LE(0x7B))
         return 0;
     }
