@@ -34,13 +34,10 @@ namespace bmx160 {
         return pins.i2cReadNumber(BMX160_ADDR, NumberFormat.UInt16LE);
     }
 
-    /**
-  * Create a new KS103 device
-  */
-    //% blockId="KS103_CREATE_DEVICE" block="KS103 create a device"
+    //% blockId="BMX160_INITIAL_STEP" block="Initial step counter"
     //% weight=100 blockGap=8
     //% parts="BMX160"
-    export function test(): number {
+    export function initialStep() {
         /*setreg(0x7E, 0xB6)
         control.waitMicros(15);
         
@@ -54,17 +51,21 @@ namespace bmx160 {
         setreg(0x7E, 0x11)
         control.waitMicros(100);
         setreg(0x7B, 11);
-       setreg(0x7E, 0xB2);
+        setreg(0x7E, 0xB2);
 
         serial.writeLine("" + getUInt8LE(0x03))
         serial.writeLine("" + getUInt8LE(0x7B))
-        return 0;
+    
     }
 
-    /**
-    * Create a new KS103 device
-    */
-    //% blockId="Get Step" block="Get step counter2"
+    //% blockId="BMX160_RESET_STEP" block="Reset step counter"
+    //% weight=100 blockGap=8
+    //% parts="BMX160"
+    export function resetStep() {
+        setreg(0x7E, 0xB2);
+    }
+
+    //% blockId="BMX160_GET_STEP" block="Get step counter"
     //% weight=100 blockGap=8
     //% parts="BMX160"
     export function getStep(): number {
