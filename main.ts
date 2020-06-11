@@ -34,6 +34,31 @@ namespace bmx160 {
         return pins.i2cReadNumber(BMX160_ADDR, NumberFormat.UInt16LE);
     }
 
+    //% blockId="BMX160_INITIAL_LIGHT_STEP" block="Initial light weight step counter"
+    //% weight=100 blockGap=8
+    //% parts="BMX160"
+    export function initialLightStep() {
+        /*setreg(0x7E, 0xB6)
+        control.waitMicros(15);
+        
+        setreg(0x7E, 0x11)
+        control.waitMicros(50);
+        setreg(0x7E, 0x15)
+        control.waitMicros(100);
+        setreg(0x7E, 0x19)
+        control.waitMicros(10);
+        */
+        setreg(0x7E, 0x11)
+        control.waitMicros(100);
+        setreg(0x7A, 0x2D);
+        setreg(0x7B, 8);
+        setreg(0x7E, 0xB2);
+
+        serial.writeLine("" + getUInt8LE(0x7A))
+        serial.writeLine("" + getUInt8LE(0x7B))
+
+    }
+
     //% blockId="BMX160_INITIAL_STEP" block="Initial step counter"
     //% weight=100 blockGap=8
     //% parts="BMX160"
@@ -47,15 +72,16 @@ namespace bmx160 {
         control.waitMicros(100);
         setreg(0x7E, 0x19)
         control.waitMicros(10);
-        */       
+        */
         setreg(0x7E, 0x11)
         control.waitMicros(100);
+        setreg(0x7A, 0x15);
         setreg(0x7B, 11);
         setreg(0x7E, 0xB2);
 
-        serial.writeLine("" + getUInt8LE(0x03))
+        serial.writeLine("" + getUInt8LE(0x7A))
         serial.writeLine("" + getUInt8LE(0x7B))
-    
+
     }
 
     //% blockId="BMX160_RESET_STEP" block="Reset step counter"
